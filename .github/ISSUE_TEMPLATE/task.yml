@@ -1,0 +1,24 @@
+name: TASK chunk
+description: Implement one TASKS.md chunk
+title: "P0-00: "
+labels: ["chore"]
+body:
+  - type: input
+    id: chunk
+    attributes:
+      label: Chunk ID
+      placeholder: P0-00
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Paste the chunk checklist and done condition from TASKS.md.
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Tests
+      description: List focused proof and affected gates.

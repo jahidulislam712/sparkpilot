@@ -55,7 +55,7 @@ Goal: empty workspace every later chunk plugs into.
 **Done:** a deliberately bad file fails `pnpm lint`.
 
 ### P0-03 Git hooks and commit rules
-- [ ] Husky + lint-staged + commitlint (Conventional Commits), PR and issue templates
+- [x] Husky + lint-staged + commitlint (Conventional Commits), PR and issue templates
 **Test:** a bad commit message is rejected. **Done:** hooks install on `pnpm i`.
 
 ### P0-04 Typed environment config

@@ -9,3 +9,8 @@
 
 - Added strict shared TypeScript configuration and flat ESLint configuration.
 - Added shared Prettier formatting and documented resolved tool versions.
+
+## P0-03: Git hooks and commit rules
+
+- Added Husky hooks for staged lint/format checks and Conventional Commit validation.
+- Added pull request and issue templates for consistent chunk delivery.

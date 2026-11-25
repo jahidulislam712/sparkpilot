@@ -9,6 +9,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "prepare": "husky && git config core.hooksPath .husky/_",
     "lint": "eslint . --max-warnings=0",
     "format": "prettier --write \"**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,json,yaml,yml}\"",
     "format:check": "prettier --check \"**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,json,yaml,yml}\"",
@@ -16,10 +17,14 @@
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/config-conventional": "21.2.4",
     "@eslint/js": "10.0.1",
     "@sparkpilot/config": "workspace:*",
     "eslint": "10.15.0",
     "eslint-config-prettier": "10.1.8",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.2",
     "prettier": "3.10.1",
     "turbo": "2.11.13",
     "typescript": "6.0.3",

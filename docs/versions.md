@@ -11,3 +11,7 @@
 | typescript-eslint | 8.74.0 | Recommended TypeScript rules |
 | Prettier | 3.10.1 | Shared formatting |
 | eslint-config-prettier | 10.1.8 | Prevent formatting conflicts |
+| Husky | 9.1.7 | Git hook lifecycle |
+| lint-staged | 17.6.2 | Run checks on staged files |
+| @commitlint/cli | 21.2.4 | Validate Conventional Commit messages |
+| @commitlint/config-conventional | 21.2.4 | Conventional Commit rules |
