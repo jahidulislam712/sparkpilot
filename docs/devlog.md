@@ -19,3 +19,8 @@
 
 - Added Zod-validated environment parsing in `packages/config`.
 - Added `.env.example` and unit tests for valid and invalid configuration.
+
+## P1-01: Local services
+
+- Added pgvector PostgreSQL 18 and Mailpit through Docker Compose.
+- Bound local ports to loopback and added the `vector` extension init script.

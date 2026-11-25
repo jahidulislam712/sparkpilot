@@ -19,3 +19,5 @@
 | dotenv | 18.0.10 | Local `.env` loading |
 | Vitest | 5.1.2 | Environment unit tests |
 | @types/node | 26.6.10 | Node.js type definitions |
+| pgvector PostgreSQL | 0.8.2-pg18 | Local pgvector database image |
+| Mailpit | v1.34.0 | Local SMTP and web inbox |

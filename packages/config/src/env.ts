@@ -18,6 +18,7 @@ const envSchema = z
     LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace"]).default("info"),
     DATABASE_URL: optionalUrl,
     DIRECT_DATABASE_URL: optionalUrl,
+    POSTGRES_PORT: z.coerce.number().int().min(1).max(65535).default(5432),
     CORS_ORIGINS: z.string().default("http://localhost:3000"),
     JWT_SECRET: z.string().min(32).optional(),
     ACCESS_TOKEN_TTL_MINUTES: z.coerce.number().int().positive().default(15),
@@ -29,6 +30,8 @@ const envSchema = z
     SMTP_USER: z.string().optional(),
     SMTP_PASS: z.string().optional(),
     SMTP_FROM: z.string().optional(),
+    MAILPIT_SMTP_PORT: z.coerce.number().int().min(1).max(65535).default(1025),
+    MAILPIT_HTTP_PORT: z.coerce.number().int().min(1).max(65535).default(8025),
     LLM_PROVIDER: z
       .enum(["nvidia", "openrouter", "groq", "ollama", "gemini", "fake"])
       .default("fake"),

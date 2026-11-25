@@ -7,6 +7,7 @@ describe("parseEnv", () => {
       NODE_ENV: "test",
       API_PORT: "4000",
       LOG_LEVEL: "debug",
+      POSTGRES_PORT: "15432",
       LLM_PROVIDER: "fake",
       EMBEDDING_PROVIDER: "fake",
     });
@@ -14,6 +15,7 @@ describe("parseEnv", () => {
     expect(env.NODE_ENV).toBe("test");
     expect(env.API_PORT).toBe(4000);
     expect(env.LOG_LEVEL).toBe("debug");
+    expect(env.POSTGRES_PORT).toBe(15432);
   });
 
   it("rejects invalid environment values", () => {

@@ -67,8 +67,8 @@ Goal: empty workspace every later chunk plugs into.
 # PHASE 1: Docker and CI/CD first
 
 ### P1-01 Local services
-- [ ] `docker-compose.yml`: pgvector Postgres (healthcheck, volume, init script `CREATE EXTENSION vector`), Mailpit; ports on 127.0.0.1
-**Done:** `docker compose up -d` is healthy and `\dx` lists `vector`.
+- [x] `docker-compose.yml`: pgvector Postgres (healthcheck, volume, init script `CREATE EXTENSION vector`), Mailpit; ports on 127.0.0.1
+**Done:** `docker compose up -d` is healthy, `\dx` lists `vector`, and MinIO (S3-compatible storage).
 
 ### P1-02 Minimal API and Dockerfile
 - [ ] Express 5 app with `GET /health/live` only; multi-stage, non-root Dockerfile with `HEALTHCHECK`; `.dockerignore`
