@@ -75,7 +75,7 @@ Goal: empty workspace every later chunk plugs into.
 **Test:** Supertest on health. **Done:** image builds and responds.
 
 ### P1-03 Minimal web and Dockerfile
-- [ ] Next.js (App Router, Tailwind) with one placeholder page; standalone-output Dockerfile
+- [x] Next.js (App Router, Tailwind, Shadcn) with one placeholder page; standalone-output Dockerfile
 **Done:** image builds and serves the page.
 
 ### P1-04 CI workflow

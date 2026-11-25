@@ -12,6 +12,8 @@ export default defineConfig([
       "dist/**",
       "**/dist/**",
       ".next/**",
+      "**/.next/**",
+      ".next/**",
       "coverage/**",
       "playwright-report/**",
       "test-results/**",

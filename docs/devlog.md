@@ -29,3 +29,8 @@
 
 - Added Express 5 app/server split with `/health/live`.
 - Added Supertest health coverage and a multi-stage non-root Docker image.
+
+## P1-03: Minimal web
+
+- Added Next.js App Router placeholder with Tailwind 4.
+- Added standalone Docker output and local container smoke verification.

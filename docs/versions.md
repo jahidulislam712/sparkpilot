@@ -25,3 +25,8 @@
 | Supertest | 7.3.2 | Health endpoint integration test |
 | tsx | 4.23.15 | TypeScript development runner |
 | @types/express | 5.0.6 | Express TypeScript definitions |
+| Next.js | 16.4.6 | Minimal App Router web application |
+| React | 19.3.1 | Next.js UI runtime |
+| Tailwind CSS | 4.3.5 | Web styling |
+| @tailwindcss/postcss | 4.3.5 | Tailwind PostCSS integration |
+| @types/react | 19.3.3 | React TypeScript definitions |
