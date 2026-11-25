@@ -71,7 +71,7 @@ Goal: empty workspace every later chunk plugs into.
 **Done:** `docker compose up -d` is healthy, `\dx` lists `vector`, and MinIO (S3-compatible storage).
 
 ### P1-02 Minimal API and Dockerfile
-- [ ] Express 5 app with `GET /health/live` only; multi-stage, non-root Dockerfile with `HEALTHCHECK`; `.dockerignore`
+- [x] Express 5 app with `GET /health/live` only; multi-stage, non-root Dockerfile with `HEALTHCHECK`; `.dockerignore`
 **Test:** Supertest on health. **Done:** image builds and responds.
 
 ### P1-03 Minimal web and Dockerfile

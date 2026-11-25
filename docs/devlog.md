@@ -24,3 +24,8 @@
 
 - Added pgvector PostgreSQL 18 and Mailpit through Docker Compose.
 - Bound local ports to loopback and added the `vector` extension init script.
+
+## P1-02: Minimal API
+
+- Added Express 5 app/server split with `/health/live`.
+- Added Supertest health coverage and a multi-stage non-root Docker image.

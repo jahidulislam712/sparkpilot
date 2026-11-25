@@ -10,6 +10,7 @@ export default defineConfig([
       ".pnpm-store/**",
       ".turbo/**",
       "dist/**",
+      "**/dist/**",
       ".next/**",
       "coverage/**",
       "playwright-report/**",

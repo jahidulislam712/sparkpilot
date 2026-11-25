@@ -1,0 +1,25 @@
+{
+  "name": "@sparkpilot/api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src test",
+    "test": "vitest run test",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@sparkpilot/config": "workspace:*",
+    "express": "5.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/node": "26.6.10",
+    "@types/supertest": "7.2.1",
+    "supertest": "7.3.2",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "vitest": "5.1.2"
+  }
+}

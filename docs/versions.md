@@ -21,3 +21,7 @@
 | @types/node | 26.6.10 | Node.js type definitions |
 | pgvector PostgreSQL | 0.8.2-pg18 | Local pgvector database image |
 | Mailpit | v1.34.0 | Local SMTP and web inbox |
+| Express | 5.3.0 | Minimal API server |
+| Supertest | 7.3.2 | Health endpoint integration test |
+| tsx | 4.23.15 | TypeScript development runner |
+| @types/express | 5.0.6 | Express TypeScript definitions |
