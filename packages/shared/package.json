@@ -1,0 +1,7 @@
+{
+  "name": "@sparkpilot/shared",
+  "private": true,
+  "scripts": {
+    "typecheck": "node -e \"process.exit(0)\""
+  }
+}

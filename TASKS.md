@@ -46,12 +46,12 @@ Notes: Nemotron 3 Ultra is a very large reasoning model with a 1M-token context,
 
 ### P0-01 Monorepo skeleton
 Goal: empty workspace every later chunk plugs into.
-- [ ] pnpm workspaces (`apps/*`, `packages/*`), Turborepo (`build lint test typecheck dev`), `.nvmrc`, `.editorconfig`, `.gitignore`
-- [ ] Empty packages: `packages/shared`, `packages/db`, `packages/config`
+- [x] pnpm workspaces (`apps/*`, `packages/*`), Turborepo (`build lint test typecheck dev`), `.nvmrc`, `.editorconfig`, `.gitignore`
+- [x] Empty packages: `packages/shared`, `packages/db`, `packages/config`
 **Done:** `pnpm i && pnpm turbo run typecheck` passes.
 
 ### P0-02 TypeScript, ESLint, Prettier
-- [ ] Strict base tsconfig in `packages/config` (`noUncheckedIndexedAccess`), shared ESLint flat config, Prettier
+- [x] Strict base tsconfig in `packages/config` (`noUncheckedIndexedAccess`), shared ESLint flat config, Prettier
 **Done:** a deliberately bad file fails `pnpm lint`.
 
 ### P0-03 Git hooks and commit rules

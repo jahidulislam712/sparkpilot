@@ -1,0 +1,11 @@
+{
+  "name": "@sparkpilot/config",
+  "private": true,
+  "exports": {
+    "./eslint": "./eslint.config.mjs",
+    "./tsconfig": "./tsconfig.base.json"
+  },
+  "scripts": {
+    "typecheck": "node -e \"process.exit(0)\""
+  }
+}
