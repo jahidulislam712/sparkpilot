@@ -59,7 +59,7 @@ Goal: empty workspace every later chunk plugs into.
 **Test:** a bad commit message is rejected. **Done:** hooks install on `pnpm i`.
 
 ### P0-04 Typed environment config
-- [ ] Zod `env` module that crashes on invalid config, `.env.example` (all variables), `docs/devlog.md`, `docs/versions.md`
+- [x] Zod `env` module that crashes on invalid config, `.env.example` (all variables), `docs/devlog.md`, `docs/versions.md`
 **Test:** unit test valid/invalid env. **Done:** no `process.env` outside the config module.
 
 ---

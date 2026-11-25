@@ -15,3 +15,7 @@
 | lint-staged | 17.6.2 | Run checks on staged files |
 | @commitlint/cli | 21.2.4 | Validate Conventional Commit messages |
 | @commitlint/config-conventional | 21.2.4 | Conventional Commit rules |
+| Zod | 4.6.7 | Typed environment validation |
+| dotenv | 18.0.10 | Local `.env` loading |
+| Vitest | 5.1.2 | Environment unit tests |
+| @types/node | 26.6.10 | Node.js type definitions |

@@ -14,3 +14,8 @@
 
 - Added Husky hooks for staged lint/format checks and Conventional Commit validation.
 - Added pull request and issue templates for consistent chunk delivery.
+
+## P0-04: Typed environment config
+
+- Added Zod-validated environment parsing in `packages/config`.
+- Added `.env.example` and unit tests for valid and invalid configuration.
