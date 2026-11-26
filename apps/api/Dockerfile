@@ -17,7 +17,12 @@ RUN pnpm --filter @sparkpilot/api build && pnpm --filter @sparkpilot/api deploy 
 FROM node:24.15-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
-RUN addgroup -S sparkpilot && adduser -S sparkpilot -G sparkpilot
+RUN apk upgrade --no-cache \
+  && addgroup -S sparkpilot \
+  && adduser -S sparkpilot -G sparkpilot \
+  && rm -rf /usr/local/lib/node_modules/npm \
+  && rm -rf /usr/local/lib/node_modules/corepack \
+  && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack
 COPY --from=build --chown=sparkpilot:sparkpilot /app/apps/api/dist ./dist
 COPY --from=build --chown=sparkpilot:sparkpilot /app/deploy/node_modules ./node_modules
 USER sparkpilot

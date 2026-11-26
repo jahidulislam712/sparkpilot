@@ -43,4 +43,5 @@
 ## P1-05: CD workflow
 
 - Added SHA-tagged GHCR publishing, Trivy scans, deploy-hook delivery, and API smoke testing.
+- Upgraded Alpine packages during API and web runtime image builds.
 - Added production environment secrets and a dry-run deployment fallback.
