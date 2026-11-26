@@ -24,7 +24,12 @@ FROM node:24.15-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN addgroup -S sparkpilot && adduser -S sparkpilot -G sparkpilot
+RUN apk upgrade --no-cache \
+  && addgroup -S sparkpilot \
+  && adduser -S sparkpilot -G sparkpilot \
+  && rm -rf /usr/local/lib/node_modules/npm \
+  && rm -rf /usr/local/lib/node_modules/corepack \
+  && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack
 COPY --from=build --chown=sparkpilot:sparkpilot /app/apps/web/.next/standalone ./
 COPY --from=build --chown=sparkpilot:sparkpilot /app/apps/web/.next/static ./apps/web/.next/static
 USER sparkpilot
