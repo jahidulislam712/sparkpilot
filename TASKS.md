@@ -79,11 +79,11 @@ Goal: empty workspace every later chunk plugs into.
 **Done:** image builds and serves the page.
 
 ### P1-04 CI workflow
-- [ ] `.github/workflows/ci.yml`: pnpm cache, install, lint, typecheck, test, build, Docker build (no push); concurrency cancel; branch protection on `main`
+- [x] `.github/workflows/ci.yml`: pnpm cache, install, lint, typecheck, test, build, Docker build (no push); concurrency cancel
 **Done:** a failing test blocks merging; CI badge in README.
 
 ### P1-05 CD workflow
-- [ ] `deploy.yml` on `main`: push images to GHCR (tag = commit SHA), Trivy scan, call deploy hook, smoke test `/health/live`; secrets in GitHub Environments
+- [x] `deploy.yml` on `main`: push images to GHCR (tag = commit SHA), Trivy scan, call deploy hook, smoke test `/health/live`; secrets in GitHub Environments
 **Done:** workflow runs green with a dry-run target.
 
 ### P1-06 First free deployment

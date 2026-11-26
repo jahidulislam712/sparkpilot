@@ -30,3 +30,10 @@
 | Tailwind CSS | 4.3.5 | Web styling |
 | @tailwindcss/postcss | 4.3.5 | Tailwind PostCSS integration |
 | @types/react | 19.3.3 | React TypeScript definitions |
+| GitHub Actions checkout | 7.0.1 | Repository checkout |
+| pnpm action setup | 6.1.1 | pnpm installation and caching |
+| setup-node | 7.1.0 | Node.js installation and pnpm cache |
+| Docker setup-buildx | 4.4.1 | Docker Buildx setup |
+| Docker build-push | 7.4.0 | Docker image build validation |
+| docker/login-action | 4.8.0 | GHCR authentication |
+| Trivy action | 0.36.0 | Container vulnerability scanning |

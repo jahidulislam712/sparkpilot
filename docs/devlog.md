@@ -34,3 +34,13 @@
 
 - Added Next.js App Router placeholder with Tailwind 4.
 - Added standalone Docker output and local container smoke verification.
+
+## P1-04: CI workflow
+
+- Added GitHub Actions CI for format, lint, typecheck, test, build, and Docker image builds.
+- Added concurrency cancellation and the repository CI badge.
+
+## P1-05: CD workflow
+
+- Added SHA-tagged GHCR publishing, Trivy scans, deploy-hook delivery, and API smoke testing.
+- Added production environment secrets and a dry-run deployment fallback.

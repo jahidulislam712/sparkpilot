@@ -1,0 +1,124 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Publish and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: api
+            file: apps/api/Dockerfile
+          - name: web
+            file: apps/web/Dockerfile
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v4.4.1
+
+      - name: Login to GHCR
+        uses: docker/login-action@v4.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v7.4.0
+        with:
+          context: .
+          file: ${{ matrix.file }}
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/sparkpilot-${{ matrix.name }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Scan image
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: ghcr.io/${{ github.repository_owner }}/sparkpilot-${{ matrix.name }}:${{ github.sha }}
+          format: table
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: os,library
+          severity: CRITICAL,HIGH
+
+  smoke:
+    name: Deploy and smoke test
+    runs-on: ubuntu-latest
+    needs: deploy
+    timeout-minutes: 10
+    environment: production
+    permissions:
+      contents: read
+      packages: read
+    env:
+      DEPLOY_HOOK_URL: ${{secrets.DEPLOY_HOOK_URL}}
+      DEPLOY_HOOK_TOKEN: ${{secrets.DEPLOY_HOOK_TOKEN}}
+      SMOKE_URL: ${{secrets.SMOKE_URL}}
+    steps:
+      - name: Login to GHCR
+        if: ${{ env.DEPLOY_HOOK_URL == '' }}
+        uses: docker/login-action@v4.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Dry-run deploy hook
+        if: ${{ env.DEPLOY_HOOK_URL == '' }}
+        run: |
+          echo "DEPLOY_HOOK_URL is not configured; dry-run deployment target"
+          echo "Published sparkpilot-api:${GITHUB_SHA}"
+          echo "Published sparkpilot-web:${GITHUB_SHA}"
+
+      - name: Call deploy hook
+        if: ${{ env.DEPLOY_HOOK_URL != '' }}
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }}
+          DEPLOY_HOOK_TOKEN: ${{ secrets.DEPLOY_HOOK_TOKEN }}
+        run: |
+          curl --fail --show-error --silent \
+            --request POST \
+            --header "Authorization: Bearer ${DEPLOY_HOOK_TOKEN}" \
+            --header "Content-Type: application/json" \
+            --data "{\"sha\":\"${GITHUB_SHA}\",\"apiImage\":\"ghcr.io/${GITHUB_REPOSITORY_OWNER}/sparkpilot-api:${GITHUB_SHA}\",\"webImage\":\"ghcr.io/${GITHUB_REPOSITORY_OWNER}/sparkpilot-web:${GITHUB_SHA}\"}" \
+            "${DEPLOY_HOOK_URL}"
+
+      - name: Start API image locally
+        if: ${{ env.SMOKE_URL == '' }}
+        run: |
+          docker run --detach --name sparkpilot-api \
+            --publish 127.0.0.1:13000:3000 \
+            "ghcr.io/${GITHUB_REPOSITORY_OWNER}/sparkpilot-api:${GITHUB_SHA}"
+
+      - name: Smoke test deployed API
+        env:
+          SMOKE_URL: ${{ secrets.SMOKE_URL }}
+        run: |
+          smoke_url="${SMOKE_URL:-http://127.0.0.1:13000}"
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --show-error "${smoke_url%/}/health/live"; then
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
