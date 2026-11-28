@@ -1,3 +1,5 @@
+# LOCAL DEVELOPMENT ONLY. Never used in production.
+
 name: sparkpilot
 
 services:
@@ -11,7 +13,7 @@ services:
     ports:
       - "127.0.0.1:${POSTGRES_PORT:-5433}:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql
+      - postgres_data:/var/lib/postgresql/data
       - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U sparkpilot -d sparkpilot"]
@@ -32,6 +34,48 @@ services:
       timeout: 5s
       retries: 12
       start_period: 5s
+
+  api:
+    profiles:
+      - full
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      network: host
+    environment:
+      NODE_ENV: production
+      API_HOST: 0.0.0.0
+      API_PORT: 3000
+      DATABASE_URL: postgresql://sparkpilot:sparkpilot@postgres:5432/sparkpilot
+      JWT_SECRET: local-development-only-secret-with-at-least-32-chars
+    ports:
+      - "127.0.0.1:${FULL_API_PORT:-13000}:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'node -e "fetch(''http://127.0.0.1:3000/health/live'').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  web:
+    profiles:
+      - full
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      network: host
+    ports:
+      - "127.0.0.1:${FULL_WEB_PORT:-13001}:3000"
+    depends_on:
+      api:
+        condition: service_healthy
 
 volumes:
   postgres_data:
